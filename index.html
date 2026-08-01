@@ -6,6 +6,9 @@
   <title>Shahil — Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
     :root {
       --bg: #f8fafc;
       --surface: #ffffff;
@@ -180,7 +183,8 @@
       text-align: center;
       cursor: pointer;
     }
-    .screenshot-item:hover { transform: scale(1.04); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    .screenshot-item:hover, .screenshot-item:focus-visible { transform: scale(1.04); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+    .screenshot-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     .screenshot-item img { width: 100%; height: 86px; object-fit: cover; border-radius: 7px; display: block; }
     .screenshot-caption { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 7px; }
 
@@ -214,65 +218,6 @@
       cursor: pointer;
     }
 
-    /* CODE BLOCK */
-    .code-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    @media (max-width: 650px) { .code-grid { grid-template-columns: 1fr; } }
-    .code-block {
-      background: #0f172a;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid #1e293b;
-    }
-    .code-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 16px;
-      background: #1e293b;
-      border-bottom: 1px solid #334155;
-    }
-    .code-filename {
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      color: #94a3b8;
-    }
-    .code-dots {
-      display: flex;
-      gap: 5px;
-    }
-    .code-dots span {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-    .dot-red { background: #ef4444; }
-    .dot-yellow { background: #f59e0b; }
-    .dot-green { background: #10b981; }
-    .code-body {
-      padding: 16px;
-      overflow-x: auto;
-    }
-    .code-body pre {
-      font-family: 'Space Mono', monospace;
-      font-size: 11.5px;
-      line-height: 1.7;
-      color: #e2e8f0;
-      white-space: pre;
-      margin: 0;
-    }
-    /* Syntax colors */
-    .c-tag { color: #7dd3fc; }
-    .c-attr { color: #fbbf24; }
-    .c-val { color: #86efac; }
-    .c-prop { color: #c4b5fd; }
-    .c-rule { color: #7dd3fc; }
-    .c-comment { color: #475569; font-style: italic; }
-    .c-num { color: #fb923c; }
-
     /* TOOLS */
     .project-tools { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
     .tool-badge { font-family: 'Space Mono', monospace; font-size: 11px; padding: 5px 12px; border-radius: 6px; background: rgba(124,58,237,0.1); color: #a78bfa; border: 1px solid rgba(124,58,237,0.2); }
@@ -299,7 +244,6 @@
     .delay-1 { animation-delay: 0.1s; }
     .delay-2 { animation-delay: 0.2s; }
     .delay-3 { animation-delay: 0.3s; }
-    .delay-4 { animation-delay: 0.4s; }
   </style>
 </head>
 <body>
@@ -348,11 +292,11 @@
 
       <div class="project-card">
         <div class="project-header">
-          <h3 class="project-title">💬 Application de messagerie instantanée — MERN</h3>
+          <h3 class="project-title">Application de messagerie instantanée — MERN</h3>
         </div>
         <div class="project-meta">
           <span class="project-tag">Projet personnel</span>
-          <span class="project-role">👤 Développeur unique</span>
+          <span class="project-role">Développeur unique</span>
           <span class="project-duration">⏱ Juin — Juillet 2026</span>
         </div>
         
@@ -372,11 +316,11 @@
 
       <div class="project-card">
         <div class="project-header">
-          <h3 class="project-title">⚙️ Outil de collecte automatisé — Scripting & API</h3>
+          <h3 class="project-title">Outil de collecte automatisé — Scripting & API</h3>
         </div>
         <div class="project-meta">
           <span class="project-tag">Projet CNAM</span>
-          <span class="project-role">👤 Développeur unique</span>
+          <span class="project-role">Développeur unique</span>
           <span class="project-duration">⏱ 2026</span>
         </div>
         
@@ -404,23 +348,23 @@
         <div class="visual-section">
           <p class="visual-section-label">📸 Aperçu</p>
           <div class="screenshots-grid">
-            <div class="screenshot-item" onclick="openModal('images/oracle1.png')"><img src="images/oracle1.png" alt="Aperçu 1"/><p class="screenshot-caption">Vue 1</p></div>
-            <div class="screenshot-item" onclick="openModal('images/oracle2.png')"><img src="images/oracle2.png" alt="Aperçu 2"/><p class="screenshot-caption">Vue 2</p></div>
-            <div class="screenshot-item" onclick="openModal('images/oracle3.png')"><img src="images/oracle3.png" alt="Aperçu 3"/><p class="screenshot-caption">Vue 3</p></div>
-            <div class="screenshot-item" onclick="openModal('images/oracle4.png')"><img src="images/oracle4.png" alt="Aperçu 4"/><p class="screenshot-caption">Vue 4</p></div>
-            <div class="screenshot-item" onclick="openModal('images/oracle5.png')"><img src="images/oracle5.png" alt="Aperçu 5"/><p class="screenshot-caption">Vue 5</p></div>
-            <div class="screenshot-item" onclick="openModal('images/oracle6.png')"><img src="images/oracle6.png" alt="Aperçu 6"/><p class="screenshot-caption">Vue 6</p></div>
+            <div class="screenshot-item" onclick="openModal('images/oracle1.png')"><img src="images/oracle1.png" alt="Outil de collecte de métriques - Tableau de bord principal"/><p class="screenshot-caption">Vue 1</p></div>
+            <div class="screenshot-item" onclick="openModal('images/oracle2.png')"><img src="images/oracle2.png" alt="Métriques système CPU, RAM et disque collectées"/><p class="screenshot-caption">Vue 2</p></div>
+            <div class="screenshot-item" onclick="openModal('images/oracle3.png')"><img src="images/oracle3.png" alt="Interface de visualisation de l'historique SQLite"/><p class="screenshot-caption">Vue 3</p></div>
+            <div class="screenshot-item" onclick="openModal('images/oracle4.png')"><img src="images/oracle4.png" alt="Script de collecte Bash et automatisation cron"/><p class="screenshot-caption">Vue 4</p></div>
+            <div class="screenshot-item" onclick="openModal('images/oracle5.png')"><img src="images/oracle5.png" alt="Endpoints et documentation Swagger de l'API FastAPI"/><p class="screenshot-caption">Vue 5</p></div>
+            <div class="screenshot-item" onclick="openModal('images/oracle6.png')"><img src="images/oracle6.png" alt="Conteneurisation Docker de l'application de collecte"/><p class="screenshot-caption">Vue 6</p></div>
           </div>
         </div>
       </div>
 
       <div class="project-card">
         <div class="project-header">
-          <h3 class="project-title">🌐 Site web de recettes — "On cuisine quoi ?"</h3>
+          <h3 class="project-title">Site web de recettes — "On cuisine quoi ?"</h3>
         </div>
         <div class="project-meta">
           <span class="project-tag">Projet CNAM</span>
-          <span class="project-role">👤 Développeur unique</span>
+          <span class="project-role">Développeur en équipe</span>
         </div>
         
         <div class="star-grid">
@@ -444,10 +388,10 @@
         <div class="visual-section">
           <p class="visual-section-label">📸 Aperçu</p>
           <div class="screenshots-grid">
-            <div class="screenshot-item" onclick="openModal('images/recettes_1.png')"><img src="images/recettes_1.png" alt="Aperçu 1"/><p class="screenshot-caption">Home</p></div>
-            <div class="screenshot-item" onclick="openModal('images/recettes_2.png')"><img src="images/recettes_2.png" alt="Aperçu 2"/><p class="screenshot-caption">Détail</p></div>
-            <div class="screenshot-item" onclick="openModal('images/recettes_3.png')"><img src="images/recettes_3.png" alt="Aperçu 3"/><p class="screenshot-caption">Recettes</p></div>
-            <div class="screenshot-item" onclick="openModal('images/recettes_4.png')"><img src="images/recettes_4.png" alt="Aperçu 4"/><p class="screenshot-caption">Contact</p></div>
+            <div class="screenshot-item" onclick="openModal('images/recettes_1.png')"><img src="images/recettes_1.png" alt="Page d'accueil du site de recettes avec galerie de plats"/><p class="screenshot-caption">Home</p></div>
+            <div class="screenshot-item" onclick="openModal('images/recettes_2.png')"><img src="images/recettes_2.png" alt="Page de détail d'une recette avec ingrédients et étapes"/><p class="screenshot-caption">Détail</p></div>
+            <div class="screenshot-item" onclick="openModal('images/recettes_3.png')"><img src="images/recettes_3.png" alt="Page répertoriant l'ensemble des recettes disponibles"/><p class="screenshot-caption">Recettes</p></div>
+            <div class="screenshot-item" onclick="openModal('images/recettes_4.png')"><img src="images/recettes_4.png" alt="Formulaire de contact avec validation des champs"/><p class="screenshot-caption">Contact</p></div>
           </div>
         </div>
         <div class="project-tools">
@@ -458,11 +402,11 @@
 
       <div class="project-card">
         <div class="project-header">
-          <h3 class="project-title">📋 To-do List collaborative — Gestion de tâches</h3>
+          <h3 class="project-title">To-do List collaborative — Gestion de tâches</h3>
         </div>
         <div class="project-meta">
           <span class="project-tag">Projet CNAM</span>
-          <span class="project-role">👤 Développeur unique</span>
+          <span class="project-role">Développeur unique</span>
         </div>
         
         <div class="star-grid">
@@ -483,12 +427,12 @@
         <div class="visual-section">
           <p class="visual-section-label">📸 Aperçu</p>
           <div class="screenshots-grid">
-            <div class="screenshot-item" onclick="openModal('images/todo1.png')"><img src="images/todo1.png" alt="Aperçu 1"/><p class="screenshot-caption">Vue 1</p></div>
-            <div class="screenshot-item" onclick="openModal('images/todo2.png')"><img src="images/todo2.png" alt="Aperçu 2"/><p class="screenshot-caption">Vue 2</p></div>
-            <div class="screenshot-item" onclick="openModal('images/todo3.png')"><img src="images/todo3.png" alt="Aperçu 3"/><p class="screenshot-caption">Vue 3</p></div>
-            <div class="screenshot-item" onclick="openModal('images/todo4.png')"><img src="images/todo4.png" alt="Aperçu 4"/><p class="screenshot-caption">Vue 4</p></div>
-            <div class="screenshot-item" onclick="openModal('images/todo5.png')"><img src="images/todo5.png" alt="Aperçu 5"/><p class="screenshot-caption">Vue 5</p></div>
-            <div class="screenshot-item" onclick="openModal('images/todo6.png')"><img src="images/todo6.png" alt="Aperçu 6"/><p class="screenshot-caption">Vue 6</p></div>
+            <div class="screenshot-item" onclick="openModal('images/todo1.png')"><img src="images/todo1.png" alt="Tableau de bord principal de l'application To-do List"/><p class="screenshot-caption">Vue 1</p></div>
+            <div class="screenshot-item" onclick="openModal('images/todo2.png')"><img src="images/todo2.png" alt="Création d'une nouvelle tâche avec attribution d'un collaborateur"/><p class="screenshot-caption">Vue 2</p></div>
+            <div class="screenshot-item" onclick="openModal('images/todo3.png')"><img src="images/todo3.png" alt="Vue détaillée des tâches triées par état de complétion"/><p class="screenshot-caption">Vue 3</p></div>
+            <div class="screenshot-item" onclick="openModal('images/todo4.png')"><img src="images/todo4.png" alt="Calcul et mise à jour en temps réel des scores d'équipe"/><p class="screenshot-caption">Vue 4</p></div>
+            <div class="screenshot-item" onclick="openModal('images/todo5.png')"><img src="images/todo5.png" alt="Statistiques et moyennes de productivité par département"/><p class="screenshot-caption">Vue 5</p></div>
+            <div class="screenshot-item" onclick="openModal('images/todo6.png')"><img src="images/todo6.png" alt="Interface responsive mobile de l'application To-do List"/><p class="screenshot-caption">Vue 6</p></div>
           </div>
         </div>
         <div class="project-tools">
@@ -499,11 +443,11 @@
 
       <div class="project-card">
         <div class="project-header">
-          <h3 class="project-title">♟️ Jeu de Morpion — Langage C</h3>
+          <h3 class="project-title">Jeu de Morpion — Langage C</h3>
         </div>
         <div class="project-meta">
           <span class="project-tag">Projet CNAM</span>
-          <span class="project-role">👤 Développeur unique</span>
+          <span class="project-role">Développeur unique</span>
         </div>
         
         <div class="star-grid">
@@ -526,8 +470,8 @@
         <div class="visual-section">
           <p class="visual-section-label">📸 Aperçu</p>
           <div class="screenshots-grid">
-            <div class="screenshot-item" onclick="openModal('images/morpion1.png')"><img src="images/morpion1.png" alt="Aperçu 1"/><p class="screenshot-caption">Jeu en cours</p></div>
-            <div class="screenshot-item" onclick="openModal('images/morpion2.png')"><img src="images/morpion2.png" alt="Aperçu 2"/><p class="screenshot-caption">Fin de jeu</p></div>
+            <div class="screenshot-item" onclick="openModal('images/morpion1.png')"><img src="images/morpion1.png" alt="Partie de jeu de Morpion en cours dans le terminal de commande"/><p class="screenshot-caption">Jeu en cours</p></div>
+            <div class="screenshot-item" onclick="openModal('images/morpion2.png')"><img src="images/morpion2.png" alt="Fin de partie et détection de victoire du Morpion dans la console"/><p class="screenshot-caption">Fin de jeu</p></div>
           </div>
         </div>
         <div class="project-tools">
@@ -539,7 +483,7 @@
   </section>
 
   <!-- SECTION C : BOÎTE À OUTILS -->
-  <section id="outils">
+  <section id="competences">
     <div class="container">
       <p class="section-label">03 — La Boîte à Outils</p>
       <h2>Compétences & Expériences</h2>
@@ -597,6 +541,27 @@
     function closeModal() {
       document.getElementById("imageModal").style.display = "none";
     }
+
+    // Fermeture de la modal avec la touche Échap
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    // Rendre les captures d'écran accessibles au clavier
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.screenshot-item').forEach(function(item) {
+        item.setAttribute('tabindex', '0');
+        item.setAttribute('role', 'button');
+        item.addEventListener('keydown', function(event) {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            item.click();
+          }
+        });
+      });
+    });
   </script>
 </body>
 </html>

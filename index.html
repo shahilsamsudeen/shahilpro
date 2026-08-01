@@ -14,19 +14,22 @@
       --surface: #ffffff;
       --border: #e2e8f0;
       --accent: #0ea5e9;
+      --accent-dark: #0369a1;
       --accent2: #7c3aed;
       --text: #0f172a;
       --muted: #64748b;
-      --green: #059669;
+      --green: #047857;
+      --violet: #6d28d9;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     code { font-weight: 400; }
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Syne', sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       overflow-x: hidden;
     }
+    h1, h2, h3 { font-family: 'Syne', sans-serif; }
     body::before {
       content: '';
       position: fixed;
@@ -57,10 +60,13 @@
       z-index: 100;
     }
     nav .container { display: flex; justify-content: space-between; align-items: center; }
-    .nav-logo { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--accent); }
+    @media (max-width: 480px) {
+      nav .container { flex-direction: column; gap: 12px; }
+    }
+    .nav-logo { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--accent-dark); }
     .nav-links { display: flex; gap: 32px; list-style: none; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: 0.05em; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover { color: var(--accent-dark); }
 
     /* HERO */
     .hero { padding: 100px 0 80px; position: relative; }
@@ -91,9 +97,9 @@
     .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
     .project-title { font-size: 22px; font-weight: 800; }
     .project-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 28px; }
-    .project-tag { font-family: 'Space Mono', monospace; font-size: 11px; padding: 6px 14px; border-radius: 100px; background: rgba(14,165,233,0.1); color: var(--accent); border: 1px solid rgba(14,165,233,0.2); }
-    .project-role { font-family: 'Space Mono', monospace; font-size: 11px; padding: 6px 14px; border-radius: 100px; background: rgba(124,58,237,0.08); color: #a78bfa; border: 1px solid rgba(124,58,237,0.2); }
-    .project-duration { font-family: 'Space Mono', monospace; font-size: 11px; padding: 6px 14px; border-radius: 100px; background: rgba(5,150,105,0.08); color: var(--green); border: 1px solid rgba(5,150,105,0.2); }
+    .project-tag { font-family: 'Space Mono', monospace; font-size: 11px; padding: 6px 14px; border-radius: 100px; background: rgba(14,165,233,0.1); color: var(--accent-dark); border: 1px solid rgba(14,165,233,0.2); }
+    .project-role { font-family: 'Space Mono', monospace; font-size: 11px; padding: 6px 14px; border-radius: 100px; background: rgba(124,58,237,0.08); color: var(--violet); border: 1px solid rgba(124,58,237,0.2); }
+    .project-duration { font-family: 'Space Mono', monospace; font-size: 11px; padding: 6px 14px; border-radius: 100px; background: rgba(4,120,87,0.08); color: var(--green); border: 1px solid rgba(4,120,87,0.2); }
 
     /* =====================
        STAR GRID — style uniforme sur toutes les cases
@@ -177,7 +183,7 @@
       border-radius: 10px;
       overflow: hidden;
       border: 1px solid var(--border);
-      background: #fff8f0;
+      background: #f1f5f9;
       padding: 8px;
       transition: transform 0.2s, box-shadow 0.2s;
       text-align: center;
@@ -220,7 +226,7 @@
 
     /* TOOLS */
     .project-tools { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
-    .tool-badge { font-family: 'Space Mono', monospace; font-size: 11px; padding: 5px 12px; border-radius: 6px; background: rgba(124,58,237,0.1); color: #a78bfa; border: 1px solid rgba(124,58,237,0.2); }
+    .tool-badge { font-family: 'Space Mono', monospace; font-size: 11px; padding: 5px 12px; border-radius: 6px; background: rgba(124,58,237,0.1); color: var(--violet); border: 1px solid rgba(124,58,237,0.2); }
 
     /* SKILLS */
     .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
@@ -338,13 +344,6 @@
             • Docker : Création de Dockerfiles optimisés pour isoler l'API et ses dépendances.</p></div>
           <div class="star-item"><p class="star-letter">Résultat</p><p class="star-content">Livraison d'un outil de collecte robuste et totalement fonctionnel. L'utilisation de FastAPI garantit des temps de réponse ultra-rapides. La conteneurisation Docker permet de déployer l'environnement en une seule commande (`docker-compose up`). Ce projet a renforcé mes compétences en scripting système, architecture API REST et concepts DevOps fondamentaux.</p></div>
         </div>
-        <div class="project-tools">
-          <span class="tool-badge">Bash</span>
-          <span class="tool-badge">FastAPI</span>
-          <span class="tool-badge">SQLite</span>
-          <span class="tool-badge">Docker</span>
-        </div>
-
         <div class="visual-section">
           <p class="visual-section-label">📸 Aperçu</p>
           <div class="screenshots-grid">
@@ -355,6 +354,12 @@
             <div class="screenshot-item" onclick="openModal('images/oracle5.png')"><img src="images/oracle5.png" alt="Endpoints et documentation Swagger de l'API FastAPI"/><p class="screenshot-caption">Vue 5</p></div>
             <div class="screenshot-item" onclick="openModal('images/oracle6.png')"><img src="images/oracle6.png" alt="Conteneurisation Docker de l'application de collecte"/><p class="screenshot-caption">Vue 6</p></div>
           </div>
+        </div>
+        <div class="project-tools">
+          <span class="tool-badge">Bash</span>
+          <span class="tool-badge">FastAPI</span>
+          <span class="tool-badge">SQLite</span>
+          <span class="tool-badge">Docker</span>
         </div>
       </div>
 

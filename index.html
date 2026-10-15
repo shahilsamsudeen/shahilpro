@@ -1,587 +1,315 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Shahil — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-    :root {
-      --bg: #f8fafc;
-      --surface: #ffffff;
-      --border: #e2e8f0;
-      --accent: #0ea5e9;
-      --accent-dark: #0369a1;
-      --accent2: #7c3aed;
-      --text: #0f172a;
-      --muted: #64748b;
-      --green: #047857;
-      --violet: #6d28d9;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    code { font-weight: 400; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      overflow-x: hidden;
-    }
-    h1, h2, h3 { font-family: 'Syne', sans-serif; }
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(14,165,233,0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(14,165,233,0.06) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 24px;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* NAV */
-    nav {
-      padding: 24px 0;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: rgba(248,250,252,0.95);
-      backdrop-filter: blur(10px);
-      z-index: 100;
-    }
-    nav .container { display: flex; justify-content: space-between; align-items: center; }
-    @media (max-width: 480px) {
-      nav .container { flex-direction: column; gap: 12px; }
-    }
-    .nav-logo { font-family: 'Space Mono', monospace; font-size: 14px; color: var(--accent-dark); }
-    .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: 0.05em; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--accent-dark); }
-
-    /* HERO */
-    .hero { padding: 100px 0 80px; position: relative; }
-    .hero-tag { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-    .hero-tag::before { content: ''; width: 30px; height: 1px; background: var(--accent); }
-    .hero h1 { font-size: clamp(42px, 8vw, 72px); font-weight: 800; line-height: 1.05; letter-spacing: -0.03em; margin-bottom: 24px; }
-    .hero h1 span { background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .hero-subtitle { font-size: 18px; color: var(--muted); margin-bottom: 40px; max-width: 520px; line-height: 1.6; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: var(--green); padding: 10px 20px; border-radius: 100px; font-family: 'Space Mono', monospace; font-size: 13px; margin-bottom: 40px; }
-    .hero-badge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-    .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
-    .btn { padding: 14px 28px; border-radius: 8px; font-family: 'Space Mono', monospace; font-size: 13px; text-decoration: none; transition: all 0.2s; cursor: pointer; border: none; }
-    .btn-primary { background: var(--accent); color: var(--bg); font-weight: 700; }
-    .btn-primary:hover { background: #0284c7; transform: translateY(-2px); }
-    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-
-    /* SECTION */
-    .section-label { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-    section { padding: 80px 0; border-top: 1px solid var(--border); }
-    section h2 { font-size: 36px; font-weight: 800; margin-bottom: 48px; letter-spacing: -0.02em; }
-
-    /* PROJECT CARD */
-    .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 40px; margin-bottom: 24px; transition: border-color 0.2s, transform 0.2s; }
-    .project-card:hover { border-color: var(--accent); transform: translateY(-4px); }
-    .project-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
-    .project-title { font-size: 22px; font-weight: 800; }
-    .project-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 28px; }
-    .project-tag { font-family: 'Space Mono', monospace; font-size: 11px; padding: 6px 14px; border-radius: 100px; background: rgba(14,165,233,0.1); color: var(--accent-dark); border: 1px solid rgba(14,165,233,0.2); }
-    .project-role { font-family: 'Space Mono', monospace; font-size: 11px; padding: 6px 14px; border-radius: 100px; background: rgba(124,58,237,0.08); color: var(--violet); border: 1px solid rgba(124,58,237,0.2); }
-    .project-duration { font-family: 'Space Mono', monospace; font-size: 11px; padding: 6px 14px; border-radius: 100px; background: rgba(4,120,87,0.08); color: var(--green); border: 1px solid rgba(4,120,87,0.2); }
-
-    /* =====================
-       STAR GRID — style uniforme sur toutes les cases
-    ===================== */
-    .star-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      overflow: visible;
-    }
-    @media (max-width: 600px) { .star-grid { grid-template-columns: 1fr; } }
-
-    .star-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 22px 24px 32px;
-      overflow: visible;
-    }
-    .star-letter {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-    .star-letter::before {
-      content: '';
-      width: 3px;
-      height: 14px;
-      background: var(--accent);
-      border-radius: 2px;
-    }
-    .star-content {
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.85;
-      overflow: visible;
-    }
-    .star-content ul {
-      padding-left: 18px;
-      margin-top: 6px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-    .star-content li {
-      font-size: 13.5px;
-    }
-
-    /* SCREENSHOTS */
-    .visual-section {
-      margin-top: 32px;
-      padding-top: 28px;
-      border-top: 1px solid var(--border);
-    }
-    .visual-section-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 10px;
-      color: var(--accent);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .screenshots-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-      margin-bottom: 28px;
-    }
-    @media (max-width: 600px) { .screenshots-grid { grid-template-columns: repeat(2, 1fr); } }
-    .screenshot-item {
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: #f1f5f9;
-      padding: 8px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      text-align: center;
-      cursor: pointer;
-    }
-    .screenshot-item:hover, .screenshot-item:focus-visible { transform: scale(1.04); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
-    .screenshot-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-    .screenshot-item img { width: 100%; height: 86px; object-fit: cover; border-radius: 7px; display: block; }
-    .screenshot-caption { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 7px; }
-
-    /* MODAL */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0,0,0,0.8);
-      padding: 60px 20px;
-      text-align: center;
-    }
-    .modal-content {
-      max-width: 90%;
-      max-height: 80%;
-      margin: auto;
-      border-radius: 12px;
-    }
-    .close-modal {
-      position: absolute;
-      top: 20px;
-      right: 35px;
-      color: white;
-      font-size: 40px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    /* TOOLS */
-    .project-tools { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 24px; }
-    .tool-badge { font-family: 'Space Mono', monospace; font-size: 11px; padding: 5px 12px; border-radius: 6px; background: rgba(124,58,237,0.1); color: var(--violet); border: 1px solid rgba(124,58,237,0.2); }
-
-    /* SKILLS */
-    .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-    @media (max-width: 600px) { .skills-grid { grid-template-columns: 1fr; } }
-    .skills-block { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; }
-    .skills-block h3 { font-size: 16px; font-weight: 700; margin-bottom: 20px; color: var(--accent); font-family: 'Space Mono', monospace; }
-    .skill-item { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; }
-    .skill-item:last-child { border-bottom: none; }
-    .skill-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
-    .skill-icon.blue { background: rgba(14,165,233,0.1); }
-    .skill-icon.purple { background: rgba(124,58,237,0.1); }
-    .skill-icon.green { background: rgba(16,185,129,0.1); }
-
-    /* FOOTER */
-    footer { padding: 48px 0; border-top: 1px solid var(--border); text-align: center; }
-    footer p { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--muted); }
-    footer a { color: var(--accent); text-decoration: none; }
-
-    .fade-in { opacity: 0; transform: translateY(20px); animation: fadeIn 0.6s forwards; }
-    @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
-    .delay-1 { animation-delay: 0.1s; }
-    .delay-2 { animation-delay: 0.2s; }
-    .delay-3 { animation-delay: 0.3s; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shahil Samsudeen, portfolio</title>
+<meta name="description" content="Étudiant en 2ème année de DEUST IOSI au Cnam de Paris, en recherche d'alternance en développement web, support IT ou systèmes et réseaux.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f7f7;--card:#fff;--line:#e4e7ec;--fg:#2d2d2d;--muted:#5b6475;--blue:#2b6be0;--dark:#1f4fb0;--tint:#d3e2fb;--txt:#1f56b8;--sw:150px}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:16px/1.7 Poppins,system-ui,sans-serif;letter-spacing:.02em;padding-left:var(--sw)}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+svg{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+svg.f{fill:currentColor;stroke:none}
+#side{position:fixed;inset:0 auto 0 0;width:var(--sw);background:var(--blue);color:#fff;display:flex;flex-direction:column;align-items:center;z-index:10}
+#side .logo{width:100%;height:120px;background:var(--dark);display:grid;place-items:center;font-size:42px;font-weight:400;text-decoration:none;letter-spacing:.02em}
+#side nav{flex:1;display:flex;flex-direction:column;justify-content:center;gap:38px}
+#side nav a,#side .down{display:grid;place-items:center;width:48px;height:48px;font-size:28px;border-radius:50%;color:#fff;opacity:.85;text-decoration:none}
+#side nav a:hover,#side nav a[aria-current]{opacity:1;background:rgba(255,255,255,.18)}
+#side .down{margin-bottom:28px;font-size:34px}
+#side :focus-visible{outline-color:#fff}
+section{padding:96px 7vw}
+.hero{min-height:100vh;display:grid;grid-template-columns:auto 1fr;gap:6vw;align-items:center;justify-content:center}
+.photo{position:relative;width:min(34vw,320px);aspect-ratio:1;margin-right:28px}
+.photo::before,.photo::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--tint)}
+.photo::before{transform:translateX(26px);opacity:.55}
+.photo::after{transform:translateX(14px);opacity:.9}
+.photo img,.photo span{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;z-index:1}
+.photo img{object-fit:cover;z-index:2}
+.photo span{display:grid;place-items:center;background:linear-gradient(135deg,var(--blue),var(--dark));color:#fff;font-size:88px;font-weight:500}
+.hi{font-size:15px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+h1{font-size:clamp(34px,5.4vw,60px);font-weight:600;line-height:1.1;letter-spacing:.03em;text-transform:uppercase;margin-bottom:22px}
+h1 span,.tag b{color:var(--blue)}
+.tag{color:var(--muted);max-width:30em;margin-bottom:30px}
+.tag b{font-weight:500}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:18px}
+.pill{display:inline-block;background:var(--blue);color:#fff;padding:13px 34px;border-radius:99px;text-decoration:none;font-weight:500;letter-spacing:.08em;border:0}
+.pill:hover{background:var(--dark)}
+.soc{display:flex;gap:16px}
+.soc a{display:grid;place-items:center;width:44px;height:44px;background:var(--card);border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.1);color:var(--blue);font-size:22px}
+.soc a:hover{background:var(--blue);color:#fff}
+h2{font-size:clamp(26px,3.4vw,36px);font-weight:600;letter-spacing:.03em;line-height:1.2;margin-bottom:34px}
+h2::after{content:"";display:block;width:52px;height:4px;background:var(--blue);border-radius:2px;margin-top:12px}
+.wide{max-width:1000px;margin:0 auto}
+.lead{max-width:36em;color:var(--muted);margin-bottom:34px;font-size:18px}
+.tl{list-style:none;max-width:640px}
+.tl li{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+.tl span{color:var(--muted);font-size:14px}
+.tl b{font-weight:500}
+.tl small{display:block;color:var(--muted);font-size:14px}
+.skills{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:20px}
+.box{background:var(--card);border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.07);padding:22px 24px}
+.box h3{font-size:15px;font-weight:600;color:var(--txt);margin-bottom:4px}
+.box p{font-size:15px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:24px}
+.card{background:var(--card);border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.07);overflow:hidden;display:flex;flex-direction:column}
+.cover{display:block;position:relative;width:100%;aspect-ratio:16/9;background:var(--tint);border:0;padding:0;overflow:hidden}
+button.cover{cursor:zoom-in}
+.cover img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.ph{display:grid;place-items:center;font-size:clamp(26px,3.4vw,38px);font-weight:600;color:var(--dark)}
+.badge{position:absolute;top:12px;left:12px;background:var(--blue);color:#fff;font-size:12px;font-weight:500;padding:2px 12px;border-radius:99px;letter-spacing:.04em}
+.body{padding:20px 24px 24px;display:flex;flex-direction:column;flex:1}
+.meta{color:var(--muted);font-size:13px}
+h3.t{font-size:19px;font-weight:600;line-height:1.35;margin:2px 0 8px}
+.body p{color:var(--muted);font-size:15px;margin-bottom:8px}
+.body ul{margin:0 0 14px 20px;font-size:15px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:auto 0 16px;padding-top:6px;list-style:none}
+.tags li{margin:0!important;background:var(--tint);color:var(--dark);border-radius:99px;padding:0 12px;font-size:13px;font-weight:500}
+.acts{display:flex;flex-wrap:wrap;gap:10px}
+.acts .pill,.acts a.pill{padding:7px 20px;font-size:14px}
+.acts .alt{background:none;color:var(--blue);box-shadow:inset 0 0 0 1.5px var(--blue)}
+.acts .alt:hover{background:var(--blue);color:#fff}
+button.pill{cursor:pointer;font-family:inherit}
+code{font-size:.9em;background:var(--tint);padding:1px 6px;border-radius:4px}
+.contact{text-align:center}
+.contact h2::after{margin:12px auto 0}
+.contact p{color:var(--muted);max-width:28em;margin:0 auto 28px}
+.contact .row{justify-content:center}
+footer{padding:26px 7vw;color:var(--muted);font-size:14px;text-align:center;border-top:1px solid var(--line)}
+dialog{border:0;background:none;max-width:94vw;max-height:96vh;margin:auto;color:#fff;text-align:center}
+dialog::backdrop{background:rgba(8,14,28,.92)}
+dialog img{max-width:94vw;max-height:78vh;border-radius:8px;display:block;margin:0 auto 14px}
+dialog .bar{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px}
+dialog .pill{padding:8px 20px;font-size:14px;cursor:pointer;font-family:inherit}
+@media(max-width:800px){
+body{padding-left:0;padding-bottom:68px}
+#side{inset:auto 0 0 0;width:100%;height:68px;flex-direction:row}
+#side .logo,#side .down{display:none}
+#side nav{flex-direction:row;justify-content:space-around;gap:0;width:100%}
+.hero{grid-template-columns:1fr;text-align:center;justify-items:center;padding-top:56px}
+.photo{width:min(62vw,260px);margin:0 0 20px}
+.row{justify-content:center}
+.tl li{grid-template-columns:1fr;gap:0}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V11z"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></symbol>
+<symbol id="i-code" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4M10 8l-2 2 2 2M14 8l2 2-2 2"/></symbol>
+<symbol id="i-case" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M3 13h18"/></symbol>
+<symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M12 3v17M6 14l6 6 6-6"/></symbol>
+<symbol id="i-in" viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></symbol>
+<symbol id="i-gh" viewBox="0 0 24 24"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.03 1.76 2.69 1.25 3.35.96.1-.74.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.59.23 2.76.11 3.05.74.81 1.18 1.83 1.18 3.09 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></symbol>
+<symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+</svg>
 
-  <nav>
-    <div class="container">
-      <div class="nav-logo">shahil.dev</div>
-      <ul class="nav-links">
-        <li><a href="#projets">Projets</a></li>
-        <li><a href="#competences">Compétences</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
+<aside id="side">
+  <a class="logo" href="#accueil" aria-label="Accueil">SS</a>
+  <nav aria-label="Navigation principale">
+    <a href="#accueil" title="Accueil" aria-label="Accueil"><svg><use href="#i-home"/></svg></a>
+    <a href="#apropos" title="À propos" aria-label="À propos"><svg><use href="#i-user"/></svg></a>
+    <a href="#competences" title="Compétences" aria-label="Compétences"><svg><use href="#i-code"/></svg></a>
+    <a href="#projets" title="Projets" aria-label="Projets"><svg><use href="#i-case"/></svg></a>
+    <a href="#contact" title="Contact" aria-label="Contact"><svg><use href="#i-phone"/></svg></a>
   </nav>
+  <a class="down" href="#apropos" aria-label="Descendre"><svg><use href="#i-down"/></svg></a>
+</aside>
 
-  <!-- MODAL -->
-  <div id="imageModal" class="modal" onclick="closeModal()">
-    <span class="close-modal">&times;</span>
-    <img class="modal-content" id="modalImg" src="">
+<main>
+<section id="accueil" class="hero">
+  <div class="photo">
+    <span aria-hidden="true">SS</span>
+    <img src="images/photo.jpg" alt="Portrait de Shahil Samsudeen" onerror="this.remove()">
   </div>
-
-  <!-- SECTION A : INTRODUCTION -->
-  <section class="hero" style="border-top: none;">
-    <div class="container">
-      <p class="hero-tag fade-in">Portfolio · 2ème année DEUST IOSI · CNAM</p>
-      <h1 class="fade-in delay-1">Shahil<br/><span>Développeur</span></h1>
-      <p class="hero-subtitle fade-in delay-2">
-        Étudiant en 2ᵉ année de DEUST IOSI au Cnam de Paris, je m'intéresse au développement web (HTML/CSS, JavaScript, MERN) 
-        ainsi qu'à l'administration système et réseau. Passionné par la résolution de problèmes techniques et curieux d'apprendre, 
-        je recherche une alternance pour mettre en pratique mon savoir-faire et monter en expertise aux côtés d'une équipe technique.
-      </p>
-      <div class="hero-badge fade-in delay-2">Disponible en alternance — sept. 2026 à août 2027</div>
-      <div class="hero-ctas fade-in delay-3">
-        <a href="https://www.linkedin.com/in/samsudeenshahil" class="btn btn-primary" target="_blank">🔗 LinkedIn</a>
-        <a href="https://github.com/shahilsamsudeen/profile" class="btn btn-outline" target="_blank">⚙️ GitHub</a>
-        <a href="CV_Shahil_Samsudeen_DEUST.pdf" download="CV_Shahil_Samsudeen_DEUST.pdf" class="btn btn-outline">📄 Télécharger mon CV</a>
+  <div>
+    <p class="hi">Salut ! Je suis</p>
+    <h1><span>Shahil</span> Samsudeen</h1>
+    <p class="tag">Étudiant au Cnam de Paris, je construis des sites web et je cherche une <b>alternance</b> en développement web, support IT ou systèmes et réseaux, du 05/10/2026 au 27/08/2027.</p>
+    <div class="row">
+      <a class="pill" href="CV_Shahil_Samsudeen.pdf" download>Mon CV</a>
+      <div class="soc">
+        <a href="https://www.linkedin.com/in/samsudeenshahil" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="f"><use href="#i-in"/></svg></a>
+        <a href="https://github.com/shahilsamsudeen" target="_blank" rel="noopener" aria-label="GitHub"><svg class="f"><use href="#i-gh"/></svg></a>
+        <a href="mailto:shahilsamsudeen@gmail.com" aria-label="Envoyer un email"><svg><use href="#i-mail"/></svg></a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- SECTION B : PROJETS -->
-  <section id="projets">
-    <div class="container">
-      <p class="section-label">02 — Mes Projets</p>
-      <h2>Réalisations</h2>
+<section id="apropos">
+  <div class="wide">
+    <h2>À propos</h2>
+    <p class="lead">Je suis en 2ème année de DEUST IOSI au Cnam de Paris, en alternance à un rythme de 1 semaine école, 1 semaine entreprise. Je veux comprendre ce qui fait tourner un site : systèmes, réseaux et sécurité.</p>
+    <ul class="tl">
+      <li><span>2026 à 2027</span><div><b>DEUST IOSI, 2ème année, en alternance</b><small>Cnam de Paris</small></div></li>
+      <li><span>2025 à 2026</span><div><b>Double cursus Licence + Bachelor</b><small>Cnam de Paris, parcours DevOps</small></div></li>
+      <li><span>2024 à 2025</span><div><b>Licence 1 Éco-gestion</b><small>Université Sorbonne Paris Nord</small></div></li>
+      <li><span>2023</span><div><b>Baccalauréat général</b><small>Mathématiques et SES, lycée Jean-Renoir</small></div></li>
+    </ul>
+  </div>
+</section>
 
-      <div class="project-card">
-        <div class="project-header">
-          <h3 class="project-title">Application de messagerie instantanée — MERN</h3>
-        </div>
-        <div class="project-meta">
-          <span class="project-tag">Projet personnel</span>
-          <span class="project-role">Développeur unique</span>
-          <span class="project-duration">Juin — Juillet 2026</span>
-        </div>
-        
-        <div class="star-grid">
-          <div class="star-item"><p class="star-letter">Situation</p><p class="star-content">Projet personnel pour maîtriser la stack MERN.</p></div>
-          <div class="star-item"><p class="star-letter">Tâche</p><p class="star-content">Développer une application de chat en temps réel.</p></div>
-          <div class="star-item"><p class="star-letter">Action</p><p class="star-content">Implémentation avec MongoDB, Express, React, Node.js.</p></div>
-          <div class="star-item"><p class="star-letter">Résultat</p><p class="star-content">Application de chat fonctionnelle.</p></div>
-        </div>
-        <div class="project-tools">
-          <span class="tool-badge">MongoDB</span>
-          <span class="tool-badge">Express.js</span>
-          <span class="tool-badge">React</span>
-          <span class="tool-badge">Node.js</span>
-        </div>
-        <div style="margin-top: 16px;">
-          <a href="URL_DU_REPO_GITHUB" class="btn btn-outline" target="_blank" style="padding: 8px 16px; font-size: 11px;">📂 Voir le code (GitHub)</a>
-        </div>
-      </div>
+<section id="competences">
+  <div class="wide">
+    <h2>Compétences</h2>
+    <div class="skills">
+      <div class="box"><h3>Langages</h3><p>HTML / CSS, JavaScript, PHP, Python, C, Bash</p></div>
+      <div class="box"><h3>Web</h3><p>Stack MERN, Bootstrap, API REST (FastAPI), SQLite</p></div>
+      <div class="box"><h3>Systèmes et DevOps</h3><p>Linux, macOS, Docker, CI/CD, Git</p></div>
+      <div class="box"><h3>Outils</h3><p>VS Code, Gemini CLI, Suite Office</p></div>
+      <div class="box"><h3>Qualités</h3><p>Rigueur, curiosité technique, résolution de problèmes, travail en équipe</p></div>
+      <div class="box"><h3>Langue</h3><p>Anglais B2</p></div>
+    </div>
+  </div>
+</section>
 
-      <div class="project-card">
-        <div class="project-header">
-          <h3 class="project-title">Outil de collecte automatisé — Scripting & API</h3>
-        </div>
-        <div class="project-meta">
-          <span class="project-tag">Projet CNAM</span>
-          <span class="project-role">Développeur unique</span>
-          <span class="project-duration">⏱ 2026</span>
-        </div>
-        
-        <div class="star-grid">
-          <div class="star-item"><p class="star-letter">Situation</p><p class="star-content">Dans le cadre d'un projet pratique réalisé en cours, j'ai appris à collecter et centraliser automatiquement des métriques système. L'enjeu était d'assimilier la mise en place d'un flux de données complet, depuis la récupération des informations brutes sur la machine via des scripts jusqu'à leur mise à disposition au travers d'une API.</p></div>
-          <div class="star-item"><p class="star-letter">Tâche</p><p class="star-content">Développer une solution globale de collecte automatisée comprenant :<br>
-            • Des scripts d'extraction légère et périodique des données système.<br>
-            • Une API REST sécurisée et performante pour recevoir et traiter les données.<br>
-            • Une base de données relationnelle légère pour persister l'historique.<br>
-            • La conteneurisation intégrale de l'application pour garantir un déploiement rapide et reproductible.</p></div>
-          <div class="star-item"><p class="star-letter">Action</p><p class="star-content">J'ai structuré l'outil autour d'une architecture modulaire et conteneurisée :<br>
-            • Scripting Bash : Écriture de scripts Shell automatisés (cron jobs) assurant la collecte des métriques (CPU, RAM, disque, requêtes externe).<br>
-            • API FastAPI : Développement d'endpoints en Python avec FastAPI pour ingérer les payloads JSON, valider le schéma de données et gérer le routage.<br>
-            • Stockage SQLite : Modélisation et intégration d'une base SQLite légère pour requêter efficacement l'historique.<br>
-            • Docker : Création de Dockerfiles optimisés pour isoler l'API et ses dépendances.</p></div>
-          <div class="star-item"><p class="star-letter">Résultat</p><p class="star-content">Livraison d'un outil de collecte robuste et totalement fonctionnel. L'utilisation de FastAPI garantit des temps de réponse ultra-rapides. La conteneurisation Docker permet de déployer l'environnement en une seule commande (`docker-compose up`). Ce projet a renforcé mes compétences en scripting système, architecture API REST et concepts DevOps fondamentaux.</p></div>
-        </div>
-        <div class="visual-section">
-          <p class="visual-section-label">📸 Aperçu</p>
-          <div class="screenshots-grid">
-            <div class="screenshot-item" onclick="openModal('images/oracle1.png')"><img src="images/oracle1.png" alt="Outil de collecte de métriques - Tableau de bord principal"/><p class="screenshot-caption">Vue 1</p></div>
-            <div class="screenshot-item" onclick="openModal('images/oracle2.png')"><img src="images/oracle2.png" alt="Métriques système CPU, RAM et disque collectées"/><p class="screenshot-caption">Vue 2</p></div>
-            <div class="screenshot-item" onclick="openModal('images/oracle3.png')"><img src="images/oracle3.png" alt="Interface de visualisation de l'historique SQLite"/><p class="screenshot-caption">Vue 3</p></div>
-            <div class="screenshot-item" onclick="openModal('images/oracle4.png')"><img src="images/oracle4.png" alt="Script de collecte Bash et automatisation cron"/><p class="screenshot-caption">Vue 4</p></div>
-            <div class="screenshot-item" onclick="openModal('images/oracle5.png')"><img src="images/oracle5.png" alt="Endpoints et documentation Swagger de l'API FastAPI"/><p class="screenshot-caption">Vue 5</p></div>
-            <div class="screenshot-item" onclick="openModal('images/oracle6.png')"><img src="images/oracle6.png" alt="Conteneurisation Docker de l'application de collecte"/><p class="screenshot-caption">Vue 6</p></div>
-          </div>
-        </div>
-        <div class="project-tools">
-          <span class="tool-badge">Bash</span>
-          <span class="tool-badge">FastAPI</span>
-          <span class="tool-badge">SQLite</span>
-          <span class="tool-badge">Docker</span>
-        </div>
-        <div style="margin-top: 16px;">
-          <a href="URL_DU_REPO_GITHUB" class="btn btn-outline" target="_blank" style="padding: 8px 16px; font-size: 11px;">📂 Voir le code (GitHub)</a>
-        </div>
-      </div>
+<section id="projets">
+  <div class="wide">
+    <h2>Projets</h2>
+    <div class="grid">
 
-      <div class="project-card">
-        <div class="project-header">
-          <h3 class="project-title">Site web de recettes — "On cuisine quoi ?"</h3>
+      <article class="card">
+        <div class="cover ph" aria-hidden="true">Episodd<span class="badge">En cours</span></div>
+        <div class="body">
+          <div class="meta">Projet Cnam, seul, depuis oct. 2026</div>
+          <h3 class="t">Episodd, suivi de séries</h3>
+          <p>Un site façon Letterboxd pour retrouver au même endroit les séries qu'on regarde, qu'on aime ou qu'on veut voir.</p>
+          <ul>
+            <li>Catalogue, fiche série, page « Mon activité », contact, services</li>
+            <li>Watchlist, likes, notes, avis, recherche instantanée, thème clair / sombre, données gérées en PHP</li>
+          </ul>
+          <ul class="tags"><li>HTML / CSS</li><li>JavaScript</li><li>PHP</li><li>Bootstrap</li></ul>
         </div>
-        <div class="project-meta">
-          <span class="project-tag">Projet CNAM</span>
-          <span class="project-role">Développeur en équipe</span>
-        </div>
-        
-        <div class="star-grid">
-          <div class="star-item"><p class="star-letter">Situation</p><p class="star-content">Dans le cadre d'un projet en première année de Bachelor Informatique au CNAM, je devais mettre en pratique mes bases en HTML/CSS sur un projet réel et complet. J'avais déjà abordé le HTML/CSS en cours, mais jamais sur un projet aussi complet avec navigation inter-pages, formulaire et design cohérent. L'objectif était de réaliser un projet propre, fonctionnel et bien organisé, en binome, en seulement 2 jours.</p></div>
-          <div class="star-item"><p class="star-letter">Tâche</p><p class="star-content">Créer un site web de recettes multipage, cohérent visuellement et fonctionnel, en partant de zéro. Le site devait inclure :<br>
-              • Une page d'accueil avec une galerie de recettes.<br>
-              • Des pages de recettes individuelles.<br>
-              • Un formulaire de contact opérationnel.<br>
-              • Une page FAQ structurée.</p>
-          </div>
-          <div class="star-item"><p class="star-letter">Action</p><p class="star-content">J'ai d'abord conçu l'arborescence des fichiers sur papier avant de coder, puis avancé page par page en commençant par les éléments communs (header, CSS global).<br>
-              • Arborescence HTML/CSS séparés par page<br>
-              • CSS Grid 3 colonnes responsive (mobile → desktop)<br>
-              • Header commun et navigation inter-pages<br>
-              • Cartes cliquables avec images intégrées<br>
-              • Formulaire de contact avec validation HTML5</p>
-          </div>
-          <div class="star-item"><p class="star-letter">Résultat</p><p class="star-content">Site web complet avec 6 recettes, responsive mobile/tablette/desktop, livré en 2 jours dans les délais imposés. Projet validé dans le cadre du cours, et retenu comme pièce maîtresse de ce portfolio — preuve concrète de ma capacité à mener un projet web de A à Z en autonomie totale.</p></div>
-        </div>
+      </article>
 
-        <div class="visual-section">
-          <p class="visual-section-label">📸 Aperçu</p>
-          <div class="screenshots-grid">
-            <div class="screenshot-item" onclick="openModal('images/recettes_1.png')"><img src="images/recettes_1.png" alt="Page d'accueil du site de recettes avec galerie de plats"/><p class="screenshot-caption">Home</p></div>
-            <div class="screenshot-item" onclick="openModal('images/recettes_2.png')"><img src="images/recettes_2.png" alt="Page de détail d'une recette avec ingrédients et étapes"/><p class="screenshot-caption">Détail</p></div>
-            <div class="screenshot-item" onclick="openModal('images/recettes_3.png')"><img src="images/recettes_3.png" alt="Page répertoriant l'ensemble des recettes disponibles"/><p class="screenshot-caption">Recettes</p></div>
-            <div class="screenshot-item" onclick="openModal('images/recettes_4.png')"><img src="images/recettes_4.png" alt="Formulaire de contact avec validation des champs"/><p class="screenshot-caption">Contact</p></div>
-          </div>
+      <article class="card">
+        <div class="cover ph" aria-hidden="true">Chat MERN</div>
+        <div class="body">
+          <div class="meta">Projet personnel, seul, juin à juil. 2026</div>
+          <h3 class="t">Application de messagerie instantanée</h3>
+          <p>Une application de chat en temps réel, développée pour maîtriser la stack MERN de bout en bout.</p>
+          <ul class="tags"><li>MongoDB</li><li>Express</li><li>React</li><li>Node.js</li></ul>
         </div>
-        <div class="project-tools">
-          <span class="tool-badge">HTML5</span>
-          <span class="tool-badge">CSS3</span>
-        </div>
-        <div style="margin-top: 16px;">
-          <a href="https://github.com/shahilsamsudeen/Cnam/tree/main/%20DSP%20DevOps/html%3Acss/monsite" class="btn btn-outline" target="_blank" style="padding: 8px 16px; font-size: 11px;">📂 Voir le code (GitHub)</a>
-        </div>
-      </div>
+      </article>
 
-      <div class="project-card">
-        <div class="project-header">
-          <h3 class="project-title">To-do List collaborative — Gestion de tâches</h3>
+      <article class="card" data-name="oracle" data-n="6" data-label="Outil de collecte">
+        <button class="cover opengal" type="button" aria-label="Voir les captures de l'outil de collecte"><img src="images/oracle1.png" alt="" loading="lazy"></button>
+        <div class="body">
+          <div class="meta">Projet Cnam, seul, 2026</div>
+          <h3 class="t">Outil de collecte de métriques système</h3>
+          <p>Un flux complet, de la machine jusqu'à l'API : collecte, stockage de l'historique, déploiement en conteneur.</p>
+          <ul>
+            <li>Scripts Bash lancés par cron : CPU, RAM, disque</li>
+            <li>API REST FastAPI qui valide le JSON reçu, historique dans SQLite</li>
+            <li>Lancement en une commande avec <code>docker-compose up</code></li>
+          </ul>
+          <ul class="tags"><li>Bash</li><li>FastAPI</li><li>SQLite</li><li>Docker</li></ul>
+          <div class="acts"><button class="pill opengal" type="button">Voir les 6 captures</button></div>
         </div>
-        <div class="project-meta">
-          <span class="project-tag">Projet CNAM</span>
-          <span class="project-role">Développeur unique</span>
-        </div>
-        
-        <div class="star-grid">
-          <div class="star-item"><p class="star-letter">Situation</p><p class="star-content">Dans le cadre d'un projet de cours au CNAM, je devais concevoir une application web de gestion de tâches d'équipe en JavaScript pur. L'enjeu : manipuler des structures de données complexes et maintenir une cohérence entre plusieurs entités (tâches, travailleurs, départements) sans aucun framework ni base de données.</p></div>
-          <div class="star-item"><p class="star-letter">Tâche</p><p class="star-content">Créer une application interactive permettant de :<br>
-            • Suivre un score individuel par travailleur<br>
-            • Ajouter et valider des tâches assignées à des travailleurs<br>
-            • Agréger les statistiques par département en temps réel<br>
-            • Calculer la moyenne de tâches validées par département</p></div>
-          <div class="star-item"><p class="star-letter">Action</p><p class="star-content">J'ai modélisé l'application autour de trois tableaux d'objets synchronisés et mis en place un système de mise à jour en cascade.<br>
-            • 3 structures de données : tabTaches, tabTravailleurs, tabDepartement<br>
-            • Ajout dynamique de travailleurs et de départements à la volée<br>
-            • Validation de tâche déclenchant une mise à jour en cascade (score travailleur + stats département)<br>
-            • Rendu HTML généré dynamiquement via innerHTML</p></div>
-          <div class="star-item"><p class="star-letter">Résultat</p><p class="star-content">Application fonctionnelle avec gestion d'état en temps réel, sans rechargement de page. Les scores, statistiques de département et moyennes se mettent à jour instantanément. Ce projet m'a permis de maîtriser la manipulation du DOM, la gestion d'événements et la synchronisation de données entre plusieurs structures — compétences clés du développement front-end.</p></div>
-        </div>
+      </article>
 
-        <div class="visual-section">
-          <p class="visual-section-label">📸 Aperçu</p>
-          <div class="screenshots-grid">
-            <div class="screenshot-item" onclick="openModal('images/todo1.png')"><img src="images/todo1.png" alt="Tableau de bord principal de l'application To-do List"/><p class="screenshot-caption">Vue 1</p></div>
-            <div class="screenshot-item" onclick="openModal('images/todo2.png')"><img src="images/todo2.png" alt="Création d'une nouvelle tâche avec attribution d'un collaborateur"/><p class="screenshot-caption">Vue 2</p></div>
-            <div class="screenshot-item" onclick="openModal('images/todo3.png')"><img src="images/todo3.png" alt="Vue détaillée des tâches triées par état de complétion"/><p class="screenshot-caption">Vue 3</p></div>
-            <div class="screenshot-item" onclick="openModal('images/todo4.png')"><img src="images/todo4.png" alt="Calcul et mise à jour en temps réel des scores d'équipe"/><p class="screenshot-caption">Vue 4</p></div>
-            <div class="screenshot-item" onclick="openModal('images/todo5.png')"><img src="images/todo5.png" alt="Statistiques et moyennes de productivité par département"/><p class="screenshot-caption">Vue 5</p></div>
-            <div class="screenshot-item" onclick="openModal('images/todo6.png')"><img src="images/todo6.png" alt="Interface responsive mobile de l'application To-do List"/><p class="screenshot-caption">Vue 6</p></div>
-          </div>
+      <article class="card" data-name="recettes_" data-n="4" data-label="Site de recettes">
+        <button class="cover opengal" type="button" aria-label="Voir les captures du site de recettes"><img src="images/recettes_1.png" alt="" loading="lazy"></button>
+        <div class="body">
+          <div class="meta">Projet Cnam, en binôme, 2 jours</div>
+          <h3 class="t">Site de recettes « On cuisine quoi ? »</h3>
+          <p>Un site multipage conçu de zéro : arborescence dessinée sur papier avant de coder, puis page par page.</p>
+          <ul>
+            <li>Galerie, 6 recettes, FAQ, formulaire avec validation HTML5</li>
+            <li>CSS Grid en 3 colonnes, responsive du mobile au bureau</li>
+          </ul>
+          <ul class="tags"><li>HTML5</li><li>CSS3</li></ul>
+          <div class="acts"><button class="pill opengal" type="button">Voir les 4 captures</button><a class="pill alt" href="https://github.com/shahilsamsudeen/Cnam/tree/main/%20DSP%20DevOps/html%3Acss/monsite" target="_blank" rel="noopener">Code GitHub</a></div>
         </div>
-        <div class="project-tools">
-          <span class="tool-badge">JavaScript</span>
-          <span class="tool-badge">DOM</span>
-        </div>
-        <div style="margin-top: 16px;">
-          <a href="https://github.com/shahilsamsudeen/Cnam/blob/main/%20DSP%20DevOps/js/Todolist/tp.js" class="btn btn-outline" target="_blank" style="padding: 8px 16px; font-size: 11px;">📂 Voir le code (GitHub)</a>
-        </div>
-      </div>
+      </article>
 
-      <div class="project-card">
-        <div class="project-header">
-          <h3 class="project-title">Jeu de Morpion — Langage C</h3>
+      <article class="card" data-name="todo" data-n="6" data-label="To-do List">
+        <button class="cover opengal" type="button" aria-label="Voir les captures de la To-do List"><img src="images/todo1.png" alt="" loading="lazy"></button>
+        <div class="body">
+          <div class="meta">Projet Cnam, seul, 2026</div>
+          <h3 class="t">To-do List collaborative</h3>
+          <p>Gestion de tâches par employé et par département, en JavaScript pur, sans framework ni base de données.</p>
+          <ul>
+            <li>Trois tableaux d'objets synchronisés : tâches, travailleurs, départements</li>
+            <li>Valider une tâche met à jour scores et statistiques, sans recharger la page</li>
+          </ul>
+          <ul class="tags"><li>JavaScript</li><li>DOM</li></ul>
+          <div class="acts"><button class="pill opengal" type="button">Voir les 6 captures</button><a class="pill alt" href="https://github.com/shahilsamsudeen/Cnam/blob/main/%20DSP%20DevOps/js/Todolist/tp.js" target="_blank" rel="noopener">Code GitHub</a></div>
         </div>
-        <div class="project-meta">
-          <span class="project-tag">Projet CNAM</span>
-          <span class="project-role">Développeur unique</span>
-        </div>
-        
-        <div class="star-grid">
-          <div class="star-item"><p class="star-letter">Situation</p><p class="star-content">Dans le cadre de mon cours de programmation en C au CNAM, j'ai implémenter un jeu de morpion complet en terminal. Le langage C, avec sa gestion manuelle de la mémoire et son absence de bibliothèques natives pour les interfaces, imposait une rigueur algorithmique stricte.<br> Le défi : modéliser la logique complète du jeu (détection de victoire, alternance des joueurs, validation des saisies) sans aucun framework.</p></div>
-          <div class="star-item"><p class="star-letter">Tâche</p><p class="star-content">Concevoir et mettre en oeuvre un jeu de morpion interactif en ligne de commande capable de :<br>
-            • Gérer une grille 3×3 représentée en tableau de 9 cases<br>
-            • Détecter toute combinaison gagnante (lignes, colonnes, diagonales)<br>
-            • Valider les saisies et refuser les cases déjà prises<br>
-            • Afficher la grille après chaque coup et annoncer le vainqueur</p>
-          </div>
-          <div class="star-item"><p class="star-letter">Action</p><p class="star-content">J'ai découpé le problème en fonctions pures et indépendantes, conformément aux bonnes pratiques du C procédural.<br>
-            • Représentation de la grille sous forme d'un char[9] initialisé à '_'<br>
-            • 4 fonctions de détection : ligneIdentique, colonneIdentique, diag1Identique, diag2Identique<br>
-            • Boucle principale avec double condition d'arrêt (victoire ou 9 coups)<br>
-            • Validation de la saisie en boucle while imbriquée</p>
-          </div>
-          <div class="star-item"><p class="star-letter">Résultat</p><p class="star-content">Programme fonctionnel, robuste et bien structuré : aucun bug de détection de victoire, gestion complète des cas limites (case invalide, partie nulle). Le découpage en fonctions a rendu le code lisible et facilement testable. Ce projet m'a permis de maîtriser la logique procédurale, la manipulation de tableaux en C et la gestion de boucles imbriquées, des fondamentaux essentiels pour un développeur.</p></div>
-        </div>
+      </article>
 
-        <div class="visual-section">
-          <p class="visual-section-label">📸 Aperçu</p>
-          <div class="screenshots-grid">
-            <div class="screenshot-item" onclick="openModal('images/morpion1.png')"><img src="images/morpion1.png" alt="Partie de jeu de Morpion en cours dans le terminal de commande"/><p class="screenshot-caption">Jeu en cours</p></div>
-            <div class="screenshot-item" onclick="openModal('images/morpion2.png')"><img src="images/morpion2.png" alt="Fin de partie et détection de victoire du Morpion dans la console"/><p class="screenshot-caption">Fin de jeu</p></div>
-          </div>
+      <article class="card" data-name="morpion" data-n="2" data-label="Morpion">
+        <button class="cover opengal" type="button" aria-label="Voir les captures du morpion"><img src="images/morpion1.png" alt="" loading="lazy"></button>
+        <div class="body">
+          <div class="meta">Projet Cnam, seul, 2026</div>
+          <h3 class="t">Jeu de morpion en C</h3>
+          <p>Un morpion complet dans le terminal, avec la logique du jeu découpée en fonctions indépendantes.</p>
+          <ul>
+            <li>Grille dans un <code>char[9]</code>, détection des victoires en 4 fonctions</li>
+            <li>Validation des saisies et gestion de la partie nulle</li>
+          </ul>
+          <ul class="tags"><li>Langage C</li><li>Algorithmique</li></ul>
+          <div class="acts"><button class="pill opengal" type="button">Voir les 2 captures</button><a class="pill alt" href="https://github.com/shahilsamsudeen/Cnam/blob/main/%20DSP%20DevOps/C/%20Morpion%20/miniprojet.c" target="_blank" rel="noopener">Code GitHub</a></div>
         </div>
-        <div class="project-tools">
-          <span class="tool-badge">Langage C</span>
-          <span class="tool-badge">Algorithmique</span>
-        </div>
-        <div style="margin-top: 16px;">
-          <a href="https://github.com/shahilsamsudeen/Cnam/blob/main/%20DSP%20DevOps/C/%20Morpion%20/miniprojet.c" class="btn btn-outline" target="_blank" style="padding: 8px 16px; font-size: 11px;">📂 Voir le code (GitHub)</a>
-        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wide">
+    <h2>Contact</h2>
+    <p>Une alternance à proposer ? Écrivez-moi, je réponds vite.</p>
+    <div class="row">
+      <a class="pill" href="mailto:shahilsamsudeen@gmail.com">shahilsamsudeen@gmail.com</a>
+      <div class="soc">
+        <a href="https://www.linkedin.com/in/samsudeenshahil" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="f"><use href="#i-in"/></svg></a>
+        <a href="https://github.com/shahilsamsudeen" target="_blank" rel="noopener" aria-label="GitHub"><svg class="f"><use href="#i-gh"/></svg></a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
+</main>
 
-  <!-- SECTION C : BOÎTE À OUTILS -->
-  <section id="competences">
-    <div class="container">
-      <p class="section-label">03 — La Boîte à Outils</p>
-      <h2>Compétences & Expériences</h2>
-      <div class="skills-grid">
-        <div class="skills-block">
-          <h3>⚙️ Hard Skills</h3>
-          <div class="skill-item"><div class="skill-icon blue">🌐</div><span>HTML / CSS, JavaScript, C, Python</span></div>
-          <div class="skill-item"><div class="skill-icon blue">📦</div><span>Stack MERN (MongoDB, Express, React, Node.js)</span></div>
-          <div class="skill-item"><div class="skill-icon blue">🐳</div><span>Docker, Automatisation CI/CD</span></div>
-          <div class="skill-item"><div class="skill-icon blue">🐧</div><span>Linux, Bash, Git</span></div>
-          <div class="skill-item"><div class="skill-icon blue">🔧</div><span>DevOps, API REST</span></div>
-        </div>
-        <div class="skills-block">
-          <h3>🧠 Soft Skills</h3>
-          <div class="skill-item"><div class="skill-icon purple">🎯</div><span>Rigueur & organisation</span></div>
-          <div class="skill-item"><div class="skill-icon purple">🔍</div><span>Curiosité & apprentissage technique</span></div>
-          <div class="skill-item"><div class="skill-icon purple">💡</div><span>Résolution de problèmes</span></div>
-          <div class="skill-item"><div class="skill-icon purple">🤝</div><span>Travail en équipe</span></div>
-          <div class="skill-item"><div class="skill-icon purple">⏱</div><span>Planification & suivi de projet</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
+<footer>© 2026 Shahil Samsudeen, étudiant en informatique au Cnam de Paris</footer>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="container" style="text-align: center;">
-      <p class="section-label" style="justify-content: center;">04 — Contact</p>
-      <h2 style="margin-bottom: 16px;">Travaillons ensemble</h2>
-      <p style="color: var(--muted); margin-bottom: 40px; font-size: 16px;">
-        Je suis disponible pour un stage en informatique / DevOps.<br/>
-        N'hésitez pas à me contacter !
-      </p>
-      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-        <a href="https://www.linkedin.com/in/samsudeenshahil" class="btn btn-primary" target="_blank">🔗 LinkedIn</a>
-        <a href="mailto:shahilsamsudeen@gmail.com" class="btn btn-outline">✉️ M'envoyer un email</a>
-      </div>
-    </div>
-  </section>
+<dialog id="gal" aria-label="Captures du projet">
+  <img alt="">
+  <div class="bar">
+    <button class="pill" type="button" id="prev">Précédente</button>
+    <span id="cnt" aria-live="polite"></span>
+    <button class="pill" type="button" id="next">Suivante</button>
+    <button class="pill" type="button" id="close">Fermer</button>
+  </div>
+</dialog>
 
-  <footer>
-    <div class="container">
-      <p>© 2026 Shahil — Étudiant informatique au Cnam</p>
-    </div>
-  </footer>
-
-  <script>
-    function openModal(imageSrc) {
-      const modal = document.getElementById("imageModal");
-      const modalImg = document.getElementById("modalImg");
-      modal.style.display = "block";
-      modalImg.src = imageSrc;
-    }
-
-    function closeModal() {
-      document.getElementById("imageModal").style.display = "none";
-    }
-
-    // Fermeture de la modal avec la touche Échap
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape') {
-        closeModal();
-      }
-    });
-
-    // Rendre les captures d'écran accessibles au clavier
-    document.addEventListener('DOMContentLoaded', function() {
-      document.querySelectorAll('.screenshot-item').forEach(function(item) {
-        item.setAttribute('tabindex', '0');
-        item.setAttribute('role', 'button');
-        item.addEventListener('keydown', function(event) {
-          if (event.key === 'Enter' || event.key === ' ') {
-            event.preventDefault();
-            item.click();
-          }
-        });
-      });
-    });
-  </script>
+<script>
+const gal=document.getElementById('gal'),gi=gal.querySelector('img'),cnt=document.getElementById('cnt');
+let s={};
+function show(){gi.src='images/'+s.name+s.i+'.png';gi.alt=s.label+', capture '+s.i;cnt.textContent=s.i+' / '+s.n}
+function go(d){s.i=(s.i-1+d+s.n)%s.n+1;show()}
+document.querySelectorAll('.card[data-name]').forEach(c=>{
+  c.querySelectorAll('.opengal').forEach(b=>b.onclick=()=>{s={name:c.dataset.name,n:+c.dataset.n,label:c.dataset.label,i:1};show();gal.showModal()});
+});
+document.getElementById('prev').onclick=()=>go(-1);
+document.getElementById('next').onclick=()=>go(1);
+document.getElementById('close').onclick=()=>gal.close();
+gal.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')go(-1);if(e.key==='ArrowRight')go(1)});
+gal.addEventListener('click',e=>{if(e.target===gal)gal.close()});
+const links=[...document.querySelectorAll('#side nav a')];
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(l=>{l.toggleAttribute('aria-current',l.getAttribute('href')==='#'+e.target.id)})}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('main section[id]').forEach(x=>io.observe(x));
+</script>
 </body>
 </html>

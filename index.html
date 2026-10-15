@@ -5,12 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shahil Samsudeen, portfolio</title>
 <meta name="description" content="Étudiant en 2ème année de DEUST IOSI au Cnam de Paris, en recherche d'alternance en développement web, support IT ou systèmes et réseaux.">
+
+<!-- Open Graph / Social Media -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Shahil Samsudeen - Portfolio">
+<meta property="og:description" content="Étudiant en DEUST IOSI au Cnam de Paris, en recherche d'alternance en développement web, support IT ou systèmes et réseaux.">
+<meta property="og:image" content="images/episodd_accueil.png">
+
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%232b6be0%22/><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22white%22 font-family=%22Poppins,sans-serif%22 font-weight=%22bold%22 font-size=%2245%22>SS</text></svg>">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f7f7f7;--card:#fff;--line:#e4e7ec;--fg:#2d2d2d;--muted:#5b6475;--blue:#2b6be0;--dark:#1f4fb0;--tint:#d3e2fb;--txt:#1f56b8;--sw:150px}
 *{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--fg);font:16px/1.7 Poppins,system-ui,sans-serif;letter-spacing:.02em;padding-left:var(--sw)}
 a{color:inherit}
@@ -22,8 +33,9 @@ svg.f{fill:currentColor;stroke:none}
 #side nav{flex:1;display:flex;flex-direction:column;justify-content:center;gap:38px}
 #side nav a,#side .down{display:grid;place-items:center;width:48px;height:48px;font-size:28px;border-radius:50%;color:#fff;opacity:.85;text-decoration:none}
 #side nav a:hover,#side nav a[aria-current]{opacity:1;background:rgba(255,255,255,.18)}
+#side nav a:focus-visible{outline:2px solid #fff;outline-offset:2px;background:rgba(255,255,255,.25);opacity:1}
 #side .down{margin-bottom:28px;font-size:34px}
-#side :focus-visible{outline-color:#fff}
+#side .down:focus-visible{outline:2px solid #fff;outline-offset:2px}
 section{padding:96px 7vw}
 .hero{min-height:100vh;display:grid;grid-template-columns:auto 1fr;gap:6vw;align-items:center;justify-content:center}
 .photo{position:relative;width:min(34vw,320px);aspect-ratio:1;margin-right:28px}
@@ -136,7 +148,7 @@ body{padding-left:0;padding-bottom:68px}
     <h1><span>Shahil</span> Samsudeen</h1>
     <p class="tag">Étudiant au Cnam de Paris, je construis des sites web et je cherche une <b>alternance</b> en développement web, support IT ou systèmes et réseaux, du 05/10/2026 au 27/08/2027.</p>
     <div class="row">
-      <a class="pill" href="CV_Shahil_Samsudeen.pdf" download>Mon CV</a>
+      <a class="pill" href="CV_Shahil_Samsudeen.pdf" target="_blank" download>Mon CV</a>
       <div class="soc">
         <a href="https://www.linkedin.com/in/samsudeenshahil" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="f"><use href="#i-in"/></svg></a>
         <a href="https://github.com/shahilsamsudeen" target="_blank" rel="noopener" aria-label="GitHub"><svg class="f"><use href="#i-gh"/></svg></a>
@@ -178,8 +190,9 @@ body{padding-left:0;padding-bottom:68px}
     <h2>Projets</h2>
     <div class="grid">
 
-      <article class="card">
+      <article class="card" id="episodd" data-name="episodd" data-n="0" data-label="Episodd">
         <div class="cover ph" aria-hidden="true">Episodd<span class="badge">En cours</span></div>
+        <button class="cover opengal" type="button" hidden aria-label="Voir les captures d'Episodd"><img src="images/episodd1.png" alt="" loading="lazy"><span class="badge">En cours</span></button>
         <div class="body">
           <div class="meta">Projet Cnam, seul, depuis oct. 2026</div>
           <h3 class="t">Episodd, suivi de séries</h3>
@@ -189,6 +202,7 @@ body{padding-left:0;padding-bottom:68px}
             <li>Watchlist, likes, notes, avis, recherche instantanée, thème clair / sombre, données gérées en PHP</li>
           </ul>
           <ul class="tags"><li>HTML / CSS</li><li>JavaScript</li><li>PHP</li><li>Bootstrap</li></ul>
+          <div class="acts" hidden><button class="pill opengal" type="button">Voir les captures</button></div>
         </div>
       </article>
 
@@ -199,6 +213,7 @@ body{padding-left:0;padding-bottom:68px}
           <h3 class="t">Application de messagerie instantanée</h3>
           <p>Une application de chat en temps réel, développée pour maîtriser la stack MERN de bout en bout.</p>
           <ul class="tags"><li>MongoDB</li><li>Express</li><li>React</li><li>Node.js</li></ul>
+          <div class="acts"><span class="pill alt" style="cursor:default;opacity:.7">Code bientôt disponible</span></div>
         </div>
       </article>
 
@@ -307,6 +322,10 @@ document.getElementById('next').onclick=()=>go(1);
 document.getElementById('close').onclick=()=>gal.close();
 gal.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')go(-1);if(e.key==='ArrowRight')go(1)});
 gal.addEventListener('click',e=>{if(e.target===gal)gal.close()});
+(function(){const c=document.getElementById('episodd');let n=0;
+function next(){const im=new Image();im.onload=()=>{n++;n<12?next():done()};im.onerror=done;im.src='images/episodd'+(n+1)+'.png'}
+function done(){if(!n)return;c.dataset.n=n;c.querySelector('.ph').hidden=true;const b=c.querySelector('button.cover');b.hidden=false;b.querySelector('img').src='images/episodd1.png';const a=c.querySelector('.acts');a.hidden=false;a.querySelector('button').textContent='Voir '+(n>1?'les '+n+' captures':'la capture')}
+next()})();
 const links=[...document.querySelectorAll('#side nav a')];
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(l=>{l.toggleAttribute('aria-current',l.getAttribute('href')==='#'+e.target.id)})}),{rootMargin:'-45% 0px -50% 0px'});
 document.querySelectorAll('main section[id]').forEach(x=>io.observe(x));

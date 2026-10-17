@@ -4,13 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Shahil Samsudeen, portfolio</title>
-<meta name="description" content="Étudiant en 2ème année de DEUST IOSI au Cnam de Paris, en recherche d'alternance en développement web, support IT ou systèmes et réseaux.">
+<meta name="description" content="Étudiant en 2ème année de DEUST IOSI au Cnam de Paris, en recherche d'alternance en développement web ou en systèmes et réseaux.">
 
 <!-- Open Graph / Social Media -->
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://shahilsamsudeen.github.io/shahilpro/">
 <meta property="og:title" content="Shahil Samsudeen - Portfolio">
-<meta property="og:description" content="Étudiant en DEUST IOSI au Cnam de Paris, en recherche d'alternance en développement web, support IT ou systèmes et réseaux.">
-<meta property="og:image" content="images/episodd_accueil.png">
+<meta property="og:description" content="Étudiant en 2ème année de DEUST IOSI au Cnam de Paris, en recherche d'alternance en développement web ou en systèmes et réseaux.">
+<meta property="og:image" content="https://shahilsamsudeen.github.io/shahilpro/images/episodd1.png"> <!-- Idéalement une image 1200x630 dédiée avec nom et objectif -->
 
 <!-- Favicon -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%232b6be0%22/><text x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22white%22 font-family=%22Poppins,sans-serif%22 font-weight=%22bold%22 font-size=%2245%22>SS</text></svg>">
@@ -144,9 +145,9 @@ body{padding-left:0;padding-bottom:68px}
     <img src="images/photo.jpg" alt="Portrait de Shahil Samsudeen" onerror="this.remove()">
   </div>
   <div>
-    <p class="hi">Salut ! Je suis</p>
+    <p class="hi">Bonjour ! Je suis</p>
     <h1><span>Shahil</span> Samsudeen</h1>
-    <p class="tag">Étudiant au Cnam de Paris, je construis des sites web et je cherche une <b>alternance</b> en développement web, support IT ou systèmes et réseaux, du 05/10/2026 au 27/08/2027.</p>
+    <p class="tag">Étudiant au Cnam de Paris, je construis des sites web et je cherche une <b>alternance</b> en développement web ou en systèmes et réseaux, dès que possible au 27/08/2027.</p>
     <div class="row">
       <a class="pill" href="CV_Shahil_Samsudeen.pdf" target="_blank" download>Mon CV</a>
       <div class="soc">
@@ -161,9 +162,9 @@ body{padding-left:0;padding-bottom:68px}
 <section id="apropos">
   <div class="wide">
     <h2>À propos</h2>
-    <p class="lead">Je suis en 2ème année de DEUST IOSI au Cnam de Paris, en alternance à un rythme de 1 semaine école, 1 semaine entreprise. Je veux comprendre ce qui fait tourner un site : systèmes, réseaux et sécurité.</p>
+    <p class="lead">Je suis en 2ème année de DEUST IOSI au Cnam de Paris (rythme alternance 1 semaine école, 1 semaine entreprise, contrat recherché). Je veux comprendre ce qui fait tourner un site : systèmes, réseaux et sécurité.</p>
     <ul class="tl">
-      <li><span>2026 à 2027</span><div><b>DEUST IOSI, 2ème année, en alternance</b><small>Cnam de Paris</small></div></li>
+      <li><span>2026 à 2027</span><div><b>DEUST IOSI, 2ème année, rythme alternance 1 semaine / 1 semaine, contrat recherché</b><small>Cnam de Paris</small></div></li>
       <li><span>2025 à 2026</span><div><b>Double cursus Licence + Bachelor</b><small>Cnam de Paris, parcours DevOps</small></div></li>
       <li><span>2024 à 2025</span><div><b>Licence 1 Éco-gestion</b><small>Université Sorbonne Paris Nord</small></div></li>
       <li><span>2023</span><div><b>Baccalauréat général</b><small>Mathématiques et SES, lycée Jean-Renoir</small></div></li>
@@ -206,14 +207,23 @@ body{padding-left:0;padding-bottom:68px}
         </div>
       </article>
 
-      <article class="card">
-        <div class="cover ph" aria-hidden="true">Chat MERN</div>
+      <article class="card" id="quickchat" data-name="quickchat" data-n="3" data-label="Chat">
+        <button class="cover opengal" type="button" aria-label="Voir les captures de Chat">
+          <img src="images/quickchat1.png" alt="" loading="lazy">
+        </button>
         <div class="body">
           <div class="meta">Projet personnel, seul, juin à juil. 2026</div>
           <h3 class="t">Application de messagerie instantanée</h3>
           <p>Une application de chat en temps réel, développée pour maîtriser la stack MERN de bout en bout.</p>
+          <ul>
+            <li>Messagerie en temps réel, authentification et gestion des messages</li>
+            <li>Architecture MERN complète de la base de données au client React</li>
+          </ul>
           <ul class="tags"><li>MongoDB</li><li>Express</li><li>React</li><li>Node.js</li></ul>
-          <div class="acts"><span class="pill alt" style="cursor:default;opacity:.7">Code bientôt disponible</span></div>
+          <div class="acts">
+            <button class="pill opengal" type="button">Voir les 3 captures</button>
+            <span class="pill alt" style="cursor:default;opacity:.7">Code bientôt disponible</span>
+          </div>
         </div>
       </article>
 

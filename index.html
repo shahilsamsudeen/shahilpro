@@ -70,7 +70,7 @@ h2::after{content:"";display:block;width:52px;height:4px;background:var(--blue);
 .box{background:var(--card);border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.07);padding:22px 24px}
 .box h3{font-size:15px;font-weight:600;color:var(--txt);margin-bottom:4px}
 .box p{font-size:15px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:24px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
 .card{background:var(--card);border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,.07);overflow:hidden;display:flex;flex-direction:column}
 .cover{display:block;position:relative;width:100%;aspect-ratio:16/9;background:var(--tint);border:0;padding:0;overflow:hidden}
 button.cover{cursor:zoom-in}
@@ -100,7 +100,11 @@ dialog::backdrop{background:rgba(8,14,28,.92)}
 dialog img{max-width:94vw;max-height:78vh;border-radius:8px;display:block;margin:0 auto 14px}
 dialog .bar{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px}
 dialog .pill{padding:8px 20px;font-size:14px;cursor:pointer;font-family:inherit}
+@media(max-width:1100px){
+.grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
 @media(max-width:800px){
+.grid{grid-template-columns:1fr}
 body{padding-left:0;padding-bottom:68px}
 #side{inset:auto 0 0 0;width:100%;height:68px;flex-direction:row}
 #side .logo,#side .down{display:none}
@@ -147,7 +151,7 @@ body{padding-left:0;padding-bottom:68px}
   <div>
     <p class="hi">Bonjour ! Je suis</p>
     <h1><span>Shahil</span> Samsudeen</h1>
-    <p class="tag">Étudiant au Cnam de Paris, je construis des sites web et je cherche une <b>alternance</b> en développement web ou en systèmes et réseaux, dès que possible au 27/08/2027.</p>
+    <p class="tag">Étudiant en 2ème année de DEUST IOSI au Cnam de Paris, je recherche une <b>alternance</b> dès que possible au 27/08/2027 en développement web, support IT ou systèmes et réseaux.</p>
     <div class="row">
       <a class="pill" href="CV_Shahil_Samsudeen.pdf" target="_blank" download>Mon CV</a>
       <div class="soc">
@@ -197,13 +201,14 @@ body{padding-left:0;padding-bottom:68px}
         <div class="body">
           <div class="meta">Projet Cnam, seul, depuis oct. 2026</div>
           <h3 class="t">Episodd, suivi de séries</h3>
-          <p>Un site façon Letterboxd pour retrouver au même endroit les séries qu'on regarde, qu'on aime ou qu'on veut voir.</p>
+          <p>Une application web de suivi de séries, passée d’un site statique à un catalogue dynamique connecté à une base MySQL.</p>
           <ul>
-            <li>Catalogue, fiche série, page « Mon activité », contact, services</li>
-            <li>Watchlist, likes, notes, avis, recherche instantanée, thème clair / sombre, données gérées en PHP</li>
+            <li>Catalogue multi-genres, fiches détaillées et recherche instantanée</li>
+            <li>Espace membre : profils, watchlist, favoris, notes, avis, journal de suivi et relations d’amitié</li>
+            <li>Recommandations personnalisées, nouveautés TMDB mises en cache 12 h et interface d’administration</li>
           </ul>
-          <ul class="tags"><li>HTML / CSS</li><li>JavaScript</li><li>PHP</li><li>Bootstrap</li></ul>
-          <div class="acts" hidden><button class="pill opengal" type="button">Voir les captures</button></div>
+          <ul class="tags"><li>HTML / CSS</li><li>JavaScript</li><li>PHP / PDO</li><li>MySQL</li><li>API REST</li><li>Bootstrap</li></ul>
+          <div class="acts"><a class="pill" href="https://episodd.infinityfreeapp.com/index.html?i=1" target="_blank" rel="noopener">Voir la démo</a><button class="pill alt opengal" type="button" hidden>Voir les captures</button></div>
         </div>
       </article>
 
@@ -222,7 +227,7 @@ body{padding-left:0;padding-bottom:68px}
           <ul class="tags"><li>MongoDB</li><li>Express</li><li>React</li><li>Node.js</li></ul>
           <div class="acts">
             <button class="pill opengal" type="button">Voir les 3 captures</button>
-            <span class="pill alt" style="cursor:default;opacity:.7">Code bientôt disponible</span>
+            <a class="pill alt" href="https://github.com/shahilsamsudeen/Quickchat" target="_blank" rel="noopener">Code GitHub</a>
           </div>
         </div>
       </article>
@@ -239,7 +244,7 @@ body{padding-left:0;padding-bottom:68px}
             <li>Lancement en une commande avec <code>docker-compose up</code></li>
           </ul>
           <ul class="tags"><li>Bash</li><li>FastAPI</li><li>SQLite</li><li>Docker</li></ul>
-          <div class="acts"><button class="pill opengal" type="button">Voir les 6 captures</button></div>
+          <div class="acts"><button class="pill opengal" type="button">Voir les 6 captures</button><a class="pill alt" href="https://github.com/shahilsamsudeen/ORACLE" target="_blank" rel="noopener">Code GitHub</a></div>
         </div>
       </article>
 
